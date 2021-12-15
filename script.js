@@ -3,6 +3,8 @@ const closeBtn = document.getElementById('close-btn');
 const rules = document.getElementById('rules');
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
+const heading = document.getElementById('heading');
+const level = document.getElementById('level');
 
 let score = 0;
 
@@ -14,9 +16,9 @@ const ball = {
   x: canvas.width / 2,
   y: canvas.height / 2,
   size: 10,
-  speed: 4,
-  dx: 4,
-  dy: -4,
+  speed: 2,
+  dx: 2,
+  dy: -2,
 };
 
 //Create paddle props
@@ -135,13 +137,20 @@ function moveBall() {
   });
 
   //Hit bottom wall - lose
-  if (ball.y + ball.size > canvas.height) showAllBricks();
+  if (ball.y + ball.size > canvas.height) {
+    heading.innerText = 'You LOST! 😛👎';
+    showAllBricks();
+  }
 }
 
 //Increase score
 function increaseScore() {
+  heading.innerText = '';
   score++;
-  if (score % (brickColumnCount * brickRowCount) === 0) showAllBricks();
+  if (score % (brickColumnCount * brickRowCount) === 0) {
+    heading.innerText = 'You WON! ✌🥇🏆';
+    showAllBricks();
+  }
 }
 
 //Make all bricks appear
@@ -191,7 +200,35 @@ function keyUp(e) {
     paddle.dx = 0;
 }
 
+//Change level
+function changeLevel(level) {
+  switch (level) {
+    case 'low':
+      ball.speed = 2;
+      ball.dx = 2;
+      ball.dy = -2;
+      paddle.w = 140;
+      break;
+    case 'middle':
+      ball.speed = 2;
+      ball.dx = 2;
+      ball.dy = -2;
+      paddle.w = 80;
+      break;
+    case 'high':
+      ball.speed = 4;
+      ball.dx = 4;
+      ball.dy = -4;
+      paddle.w = 80;
+      break;
+  }
+}
+
 document.addEventListener('keydown', keyDown);
 document.addEventListener('keyup', keyUp);
 rulesBtn.addEventListener('click', () => rules.classList.add('show'));
 closeBtn.addEventListener('click', () => rules.classList.remove('show'));
+level.addEventListener('change', (e) => {
+  changeLevel(e.target.getAttribute('data-level'));
+  e.target.blur();
+});

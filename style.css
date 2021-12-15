@@ -70,3 +70,20 @@ canvas {
   display: block;
   margin: auto;
 }
+.level {
+  color: #fff;
+  margin-bottom: 20px;
+}
+.level h2 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+.level .level-caption {
+  margin-right: 10px;
+}
+.heading {
+  position: fixed;
+  bottom: 250px;
+  color: rgb(159, 211, 253);
+  font-size: 45px;
+}

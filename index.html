@@ -10,6 +10,22 @@
   </head>
   <body>
     <h1>Breakout!</h1>
+    <div class="level" id="level">
+      <h2>Chooce a level :</h2>
+      <input type="radio" name="level" id="level-low" data-level="low" />
+      <label for="level-low" class="level-caption">LOW</label>
+      <input
+        type="radio"
+        name="level"
+        id="level-middle"
+        data-level="middle"
+        checked
+      />
+      <label for="level-middle" class="level-caption">MIDDLE</label>
+      <input type="radio" name="level" id="level-high" data-level="high" />
+      <label for="level-high" class="level-caption">HIGH</label>
+    </div>
+    <h3 id="heading" class="heading"></h3>
     <button id="rules-btn" class="btn rules-btn">Show Rules</button>
     <div class="rules" id="rules">
       <h2>How to play:</h2>
