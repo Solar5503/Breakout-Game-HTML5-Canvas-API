@@ -149,7 +149,7 @@ function increaseScore() {
   score++;
   if (score % (brickColumnCount * brickRowCount) === 0) {
     heading.innerText = 'You WON! ✌🥇🏆';
-    showAllBricks();
+    setInterval(() => showAllBricks(), 5000);
   }
 }
 
