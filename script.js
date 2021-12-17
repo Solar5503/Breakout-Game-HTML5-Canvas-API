@@ -5,6 +5,7 @@ const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 const heading = document.getElementById('heading');
 const level = document.getElementById('level');
+const audio = document.getElementById('audio');
 
 let score = 0;
 
@@ -104,19 +105,24 @@ function moveBall() {
   ball.y += ball.dy;
 
   //Wall collision (right/left)
-  if (ball.x + ball.size > canvas.width || ball.x - ball.size < 0)
+  if (ball.x + ball.size > canvas.width || ball.x - ball.size < 0) {
     ball.dx *= -1;
+    chooceSound('piu');
+  }
   //Wall collision (top/bottom)
-  if (ball.y + ball.size > canvas.height || ball.y - ball.size < 0)
+  if (ball.y + ball.size > canvas.height || ball.y - ball.size < 0) {
     ball.dy *= -1;
-
+    chooceSound('piu');
+  }
   //Paddle collision
   if (
     ball.x - ball.size > paddle.x &&
     ball.x + ball.size < paddle.x + paddle.w &&
     ball.y + ball.size > paddle.y
-  )
+  ) {
     ball.dy = -ball.speed;
+    chooceSound('kick');
+  }
 
   //Brick collision
   bricks.forEach((column) => {
@@ -130,6 +136,7 @@ function moveBall() {
         ) {
           ball.dy *= -1;
           brick.visible = false;
+          chooceSound('boom');
           increaseScore();
         }
       }
@@ -149,7 +156,12 @@ function increaseScore() {
   score++;
   if (score % (brickColumnCount * brickRowCount) === 0) {
     heading.innerText = 'You WON! ✌🥇🏆';
-    setInterval(() => showAllBricks(), 5000);
+    chooceSound('won');
+    setTimeout(() => {
+      showAllBricks();
+      ball.x = canvas.width / 2;
+      ball.y = canvas.height / 2;
+    }, 5000);
   }
 }
 
@@ -158,6 +170,7 @@ function showAllBricks() {
   bricks.forEach((column) => {
     column.forEach((brick) => (brick.visible = true));
   });
+  chooceSound('start');
   score = 0;
 }
 
@@ -222,6 +235,12 @@ function changeLevel(level) {
       paddle.w = 80;
       break;
   }
+}
+
+//Chooce sound
+function chooceSound(src) {
+  audio.src = `sound/${src}.mp3`;
+  audio.play();
 }
 
 document.addEventListener('keydown', keyDown);
