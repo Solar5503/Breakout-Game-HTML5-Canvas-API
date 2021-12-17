@@ -6,8 +6,10 @@ const ctx = canvas.getContext('2d');
 const heading = document.getElementById('heading');
 const level = document.getElementById('level');
 const audio = document.getElementById('audio');
+const turnSound = document.getElementById('sound');
 
 let score = 0;
+let isPlaying = false;
 
 const brickRowCount = 9;
 const brickColumnCount = 5;
@@ -112,7 +114,7 @@ function moveBall() {
   //Wall collision (top/bottom)
   if (ball.y + ball.size > canvas.height || ball.y - ball.size < 0) {
     ball.dy *= -1;
-    chooceSound('piu');
+    if (ball.y - ball.size < 0) chooceSound('piu');
   }
   //Paddle collision
   if (
@@ -239,8 +241,11 @@ function changeLevel(level) {
 
 //Chooce sound
 function chooceSound(src) {
-  audio.src = `sound/${src}.mp3`;
-  audio.play();
+  if (!isPlaying) {
+    isPlaying = true;
+    audio.src = `sound/${src}.mp3`;
+    audio.play();
+  }
 }
 
 document.addEventListener('keydown', keyDown);
@@ -251,3 +256,5 @@ level.addEventListener('change', (e) => {
   changeLevel(e.target.getAttribute('data-level'));
   e.target.blur();
 });
+audio.addEventListener('ended', () => (isPlaying = false));
+turnSound.addEventListener('change', () => audio.play());

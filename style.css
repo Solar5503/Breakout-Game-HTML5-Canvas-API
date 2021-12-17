@@ -16,6 +16,7 @@ body {
 h1 {
   font-size: 45px;
   color: #fff;
+  margin: 0;
 }
 
 canvas {
@@ -71,19 +72,41 @@ canvas {
   margin: auto;
 }
 .level {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: #fff;
   margin-bottom: 20px;
+  border: 2px solid #fff;
+  border-radius: 20px;
+  padding: 10px;
 }
-.level h2 {
+h2 {
   text-align: center;
   margin-bottom: 10px;
+  color: #fff;
 }
 .level .level-caption {
-  margin-right: 10px;
+  padding-right: 10px;
+  padding: 10px;
+  border-right: 2px solid #fff;
+}
+.level .level-caption:nth-last-child(1) {
+  border: none;
+}
+.level input {
+  margin-left: 10px;
 }
 .heading {
   position: fixed;
   bottom: 250px;
   color: rgb(159, 211, 253);
   font-size: 45px;
+}
+.turnSound {
+  color: #fff;
+  padding: 10px;
+  padding-right: 20px;
+  text-align: center;
+  border-right: 2px solid #fff;
 }

@@ -10,9 +10,13 @@
   </head>
   <body>
     <h1>Breakout!</h1>
-    <audio src="sound/boom.mp3" id="audio"></audio>
+    <audio src="sound/start.mp3" id="audio"></audio>
+    <h2>Chooce a level :</h2>
     <div class="level" id="level">
-      <h2>Chooce a level :</h2>
+      <div class="turnSound">
+        <input type="checkbox" id="sound" class="sound" />
+        <label for="sound">Sound ON/OFF</label>
+      </div>
       <input type="radio" name="level" id="level-low" data-level="low" />
       <label for="level-low" class="level-caption">LOW</label>
       <input
