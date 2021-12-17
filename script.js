@@ -257,4 +257,9 @@ level.addEventListener('change', (e) => {
   e.target.blur();
 });
 audio.addEventListener('ended', () => (isPlaying = false));
-turnSound.addEventListener('change', () => audio.play());
+turnSound.addEventListener('change', (e) => {
+  if (e.target.checked) {
+    audio.muted = false;
+    audio.play();
+  } else audio.muted = true;
+});
