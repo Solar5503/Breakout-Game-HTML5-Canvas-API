@@ -158,8 +158,8 @@ function increaseScore() {
   score++;
   if (score % (brickColumnCount * brickRowCount) === 0) {
     heading.innerText = 'You WON! ✌🥇🏆';
-    chooceSound('won');
     setTimeout(() => {
+      chooceSound('won');
       showAllBricks();
       ball.x = canvas.width / 2;
       ball.y = canvas.height / 2;
